@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import GoldButton from "./ui/GoldButton";
 import { scrollToSection } from "../utils/scrollToSection";
 import { useTranslation } from "react-i18next";
+import { Logo } from "../assets/img/img";
 
 const LANGS = [
   { code: "uz", label: "UZ", full: "O'zbek" },
@@ -42,19 +43,31 @@ function LangDropdown() {
           gap: "7px",
           transition: "background 0.2s, border-color 0.2s",
         }}
-        onMouseEnter={(e) => { if (!open) e.currentTarget.style.borderColor = "#D4AF6A40"; }}
-        onMouseLeave={(e) => { if (!open) e.currentTarget.style.borderColor = "#ffffff18"; }}
+        onMouseEnter={(e) => {
+          if (!open) e.currentTarget.style.borderColor = "#D4AF6A40";
+        }}
+        onMouseLeave={(e) => {
+          if (!open) e.currentTarget.style.borderColor = "#ffffff18";
+        }}
       >
         {current.label}
         <svg
-          width="8" height="8" viewBox="0 0 8 8"
+          width="8"
+          height="8"
+          viewBox="0 0 8 8"
           style={{
             transform: open ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform 0.25s ease",
             opacity: 0.5,
           }}
         >
-          <path d="M1 2.5L4 5.5L7 2.5" stroke="#D4AF6A" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+          <path
+            d="M1 2.5L4 5.5L7 2.5"
+            stroke="#D4AF6A"
+            strokeWidth="1.2"
+            fill="none"
+            strokeLinecap="round"
+          />
         </svg>
       </button>
 
@@ -82,7 +95,10 @@ function LangDropdown() {
           return (
             <button
               key={l.code}
-              onClick={() => { i18n.changeLanguage(l.code); setOpen(false); }}
+              onClick={() => {
+                i18n.changeLanguage(l.code);
+                setOpen(false);
+              }}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -90,7 +106,8 @@ function LangDropdown() {
                 width: "100%",
                 background: isActive ? "#ffffff08" : "none",
                 border: "none",
-                borderBottom: idx < LANGS.length - 1 ? "1px solid #ffffff08" : "none",
+                borderBottom:
+                  idx < LANGS.length - 1 ? "1px solid #ffffff08" : "none",
                 color: isActive ? "#D4AF6A" : "#ffffff55",
                 fontSize: "12px",
                 letterSpacing: "0.08em",
@@ -115,12 +132,14 @@ function LangDropdown() {
               }}
             >
               <span>{l.full}</span>
-              <span style={{
-                fontSize: "10px",
-                letterSpacing: "0.12em",
-                fontFamily: "monospace",
-                color: isActive ? "#D4AF6A" : "#ffffff25",
-              }}>
+              <span
+                style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.12em",
+                  fontFamily: "monospace",
+                  color: isActive ? "#D4AF6A" : "#ffffff25",
+                }}
+              >
                 {l.label}
               </span>
             </button>
@@ -139,10 +158,15 @@ function NavLink({ onClick, children }) {
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
-        background: "none", border: "none", padding: 0,
+        background: "none",
+        border: "none",
+        padding: 0,
         color: hov ? "#D4AF6A" : "#ffffff55",
-        fontSize: "13px", letterSpacing: "0.08em",
-        cursor: "pointer", transition: "color 0.2s", fontFamily: "inherit",
+        fontSize: "13px",
+        letterSpacing: "0.08em",
+        cursor: "pointer",
+        transition: "color 0.2s",
+        fontFamily: "inherit",
       }}
     >
       {children}
@@ -161,25 +185,44 @@ function MobileMenu({ open, onClose }) {
   ];
 
   return (
-    <div style={{
-      position: "fixed", inset: 0, zIndex: 200,
-      background: "#0A0A0Af8", backdropFilter: "blur(16px)",
-      display: "flex", flexDirection: "column",
-      alignItems: "center", justifyContent: "center", gap: "8px",
-      opacity: open ? 1 : 0,
-      pointerEvents: open ? "all" : "none",
-      transition: "opacity 0.3s ease",
-    }}>
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 200,
+        background: "#0A0A0Af8",
+        backdropFilter: "blur(16px)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "8px",
+        opacity: open ? 1 : 0,
+        pointerEvents: open ? "all" : "none",
+        transition: "opacity 0.3s ease",
+      }}
+    >
       <button
         onClick={onClose}
         style={{
-          position: "absolute", top: "24px", right: "24px",
-          background: "none", border: "1px solid #ffffff15",
-          color: "#ffffff60", width: "40px", height: "40px",
-          borderRadius: "2px", cursor: "pointer", fontSize: "18px",
-          display: "flex", alignItems: "center", justifyContent: "center",
+          position: "absolute",
+          top: "24px",
+          right: "24px",
+          background: "none",
+          border: "1px solid #ffffff15",
+          color: "#ffffff60",
+          width: "40px",
+          height: "40px",
+          borderRadius: "2px",
+          cursor: "pointer",
+          fontSize: "18px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-      >✕</button>
+      >
+        ✕
+      </button>
 
       {/* Mobil til switcher */}
       <div style={{ display: "flex", gap: "8px", marginBottom: "20px" }}>
@@ -191,9 +234,12 @@ function MobileMenu({ open, onClose }) {
               background: i18n.language === l.code ? "#D4AF6A" : "none",
               border: "1px solid #D4AF6A40",
               color: i18n.language === l.code ? "#0A0A0A" : "#D4AF6A",
-              padding: "6px 14px", borderRadius: "2px",
-              fontSize: "11px", letterSpacing: "0.12em",
-              fontFamily: "monospace", cursor: "pointer",
+              padding: "6px 14px",
+              borderRadius: "2px",
+              fontSize: "11px",
+              letterSpacing: "0.12em",
+              fontFamily: "monospace",
+              cursor: "pointer",
               transition: "all 0.2s",
             }}
           >
@@ -205,13 +251,20 @@ function MobileMenu({ open, onClose }) {
       {NAV_ITEMS.map((item) => (
         <button
           key={item.id}
-          onClick={() => { scrollToSection(item.id); onClose(); }}
+          onClick={() => {
+            scrollToSection(item.id);
+            onClose();
+          }}
           style={{
-            background: "none", border: "none",
-            color: "#F5F5F0", cursor: "pointer",
+            background: "none",
+            border: "none",
+            color: "#F5F5F0",
+            cursor: "pointer",
             fontFamily: "'Playfair Display', serif",
-            fontSize: "32px", fontWeight: 400,
-            padding: "12px 24px", letterSpacing: "0.04em",
+            fontSize: "32px",
+            fontWeight: 400,
+            padding: "12px 24px",
+            letterSpacing: "0.04em",
             transition: "color 0.2s",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#D4AF6A")}
@@ -222,13 +275,22 @@ function MobileMenu({ open, onClose }) {
       ))}
 
       <button
-        onClick={() => { scrollToSection("aloqa"); onClose(); }}
+        onClick={() => {
+          scrollToSection("aloqa");
+          onClose();
+        }}
         style={{
-          marginTop: "20px", background: "#D4AF6A",
-          color: "#0A0A0A", border: "none", padding: "14px 40px",
-          fontSize: "11px", letterSpacing: "0.14em",
-          cursor: "pointer", borderRadius: "2px",
-          fontWeight: 500, fontFamily: "inherit",
+          marginTop: "20px",
+          background: "#D4AF6A",
+          color: "#0A0A0A",
+          border: "none",
+          padding: "14px 40px",
+          fontSize: "11px",
+          letterSpacing: "0.14em",
+          cursor: "pointer",
+          borderRadius: "2px",
+          fontWeight: 500,
+          fontFamily: "inherit",
         }}
       >
         {t("nav.order")}
@@ -253,21 +315,40 @@ export default function Navbar({ scrollY }) {
     <>
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
 
-      <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        padding: "0 clamp(20px,5vw,56px)", height: "68px",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: scrolled ? "#0A0A0Af0" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid #ffffff0a" : "1px solid transparent",
-        transition: "all 0.4s ease",
-      }}>
+      <nav
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          padding: "0 clamp(20px,5vw,56px)",
+          height: "68px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          background: scrolled ? "#0A0A0Af0" : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          borderBottom: scrolled
+            ? "1px solid #ffffff0a"
+            : "1px solid transparent",
+          transition: "all 0.4s ease",
+        }}
+      >
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          style={{ display: "flex", alignItems: "center", gap: "10px", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+          }}
         >
-          <div style={{
+          {/* <div style={{
             width: "30px", height: "30px", border: "1px solid #D4AF6A",
             borderRadius: "2px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
           }}>
@@ -275,21 +356,48 @@ export default function Navbar({ scrollY }) {
               width: "14px", height: "14px", background: "#D4AF6A",
               borderRadius: "1px", transform: "rotate(45deg) scale(0.7)",
             }} />
-          </div>
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "19px", letterSpacing: "0.06em", color: "#F5F5F0" }}>
-            PRO<span style={{ color: "#D4AF6A" }}>MAKET</span>
+          </div> */}
+          <img
+            style={{
+              width: "60px",
+              height: "60px",
+              border: "1px solid #D4AF6A",
+              borderRadius: "2px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+            src={Logo}
+          />
+          <span
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "19px",
+              letterSpacing: "0.06em",
+              color: "#F5F5F0",
+            }}
+          >
+            PRO_<span style={{ color: "#D4AF6A" }}>MAKET</span>
           </span>
         </button>
 
         {/* Desktop nav */}
-        <div className="desktop-nav" style={{ display: "flex", gap: "40px", alignItems: "center" }}>
+        <div
+          className="desktop-nav"
+          style={{ display: "flex", gap: "40px", alignItems: "center" }}
+        >
           {NAV_ITEMS.map((item) => (
             <NavLink key={item.id} onClick={() => scrollToSection(item.id)}>
               {item.label}
             </NavLink>
           ))}
           <LangDropdown />
-          <GoldButton variant="outline" onClick={() => scrollToSection("aloqa")} style={{ padding: "9px 22px", fontSize: "11px" }}>
+          <GoldButton
+            variant="outline"
+            onClick={() => scrollToSection("aloqa")}
+            style={{ padding: "9px 22px", fontSize: "11px" }}
+          >
             {t("nav.order")}
           </GoldButton>
         </div>
@@ -299,16 +407,44 @@ export default function Navbar({ scrollY }) {
           className="mobile-menu-btn"
           onClick={() => setMenuOpen(true)}
           style={{
-            background: "none", border: "1px solid #ffffff15",
-            color: "#ffffff60", width: "40px", height: "40px",
-            borderRadius: "2px", cursor: "pointer",
-            display: "none", alignItems: "center", justifyContent: "center",
-            flexDirection: "column", gap: "5px",
+            background: "none",
+            border: "1px solid #ffffff15",
+            color: "#ffffff60",
+            width: "40px",
+            height: "40px",
+            borderRadius: "2px",
+            cursor: "pointer",
+            display: "none",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            gap: "5px",
           }}
         >
-          <span style={{ display: "block", width: "18px", height: "1px", background: "#D4AF6A" }} />
-          <span style={{ display: "block", width: "18px", height: "1px", background: "#D4AF6A" }} />
-          <span style={{ display: "block", width: "12px", height: "1px", background: "#D4AF6A" }} />
+          <span
+            style={{
+              display: "block",
+              width: "18px",
+              height: "1px",
+              background: "#D4AF6A",
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: "18px",
+              height: "1px",
+              background: "#D4AF6A",
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: "12px",
+              height: "1px",
+              background: "#D4AF6A",
+            }}
+          />
         </button>
       </nav>
 

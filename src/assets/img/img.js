@@ -1,4 +1,5 @@
 import Bux from "./bux.jpg";
+import Logo from "./logo.JPG";
 import Bux1 from "./bux1.jpg";
 import Bux2 from "./bux2.jpg";
 import Bux3 from "./bux3.jpg";
@@ -140,4 +141,5 @@ export {
   Yash6,
   Yash7,
   Yash8,
+  Logo
 };
